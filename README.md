@@ -9,7 +9,7 @@
 ## About
 
 **Module for [PrestaShop][prestashop]:**<br>
-Boost module development by providing a solid bedrock.
+Fix order slip total considering cart rules.
 
 ## Reporting issues
 

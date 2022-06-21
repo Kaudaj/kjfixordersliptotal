@@ -18,7 +18,7 @@
         <note>Line: </note>
       </trans-unit>
       <trans-unit id="8b688592443e7ec75f2d835e6740473c">
-        <source>        Boost module development by providing a solid bedrock.</source>
+        <source>        Fix order slip total considering cart rules.</source>
         <target>Booste le développement de module en fournissant une base solide.</target>
         <note>Line: </note>
       </trans-unit>

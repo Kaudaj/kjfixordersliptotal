@@ -4,6 +4,8 @@ parameters:
   	# From Phpstan 0.12, paths are relative to the .neon file.
     - ../../src
     - ../../kjfixordersliptotal.php
+  excludePaths:
+    - ../../src/Adapter/Order/QueryHandler/GetOrderForViewingHandler.php
   ignoreErrors:
     # - "#Insert your error here (don't forget to escape special characters like the following hash: \\#)#"
   reportUnmatchedIgnoredErrors: true

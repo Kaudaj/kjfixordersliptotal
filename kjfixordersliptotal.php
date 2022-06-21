@@ -23,11 +23,7 @@ if (file_exists(dirname(__FILE__) . '/vendor/autoload.php')) {
     require_once dirname(__FILE__) . '/vendor/autoload.php';
 }
 
-use Kaudaj\Module\FixOrderSlipTotal\Form\Settings\GeneralConfiguration;
-use Kaudaj\Module\FixOrderSlipTotal\Form\Settings\GeneralType;
 use PrestaShop\PrestaShop\Adapter\Configuration;
-use PrestaShop\PrestaShop\Adapter\SymfonyContainer;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class KJFixOrderSlipTotal extends Module
 {
@@ -39,9 +35,7 @@ class KJFixOrderSlipTotal extends Module
     /**
      * @var string[] Hooks to register/unregister
      */
-    public const HOOKS = [
-        'exampleHook',
-    ];
+    public const HOOKS = [];
 
     /**
      * @var Configuration<string, mixed> Configuration
@@ -62,30 +56,14 @@ class KJFixOrderSlipTotal extends Module
 
         $this->displayName = $this->trans('Fix Order Slip Total', [], 'Modules.Kjfixordersliptotal.Admin');
         $this->description = $this->trans(<<<EOF
-        Boost module development by providing a solid bedrock.
+        Fix order slip total considering cart rules.
 EOF
             ,
             [],
             'Modules.Kjfixordersliptotal.Admin'
         );
 
-        $this->tabs = [
-            [
-                'name' => 'Fix Order Slip Total Settings',
-                'class_name' => 'KJFixOrderSlipTotalSettings',
-                'route_name' => 'kj_fix_order_slip_total_settings',
-                'parent_class_name' => 'CONFIGURE',
-                'visible' => false,
-                'wording' => 'Fix Order Slip Total Settings',
-                'wording_domain' => 'Modules.Kjfixordersliptotal.Admin',
-            ],
-        ];
-
         $this->configuration = new Configuration();
-
-        $this->configurationValues = [
-            GeneralConfiguration::getConfigurationKey(GeneralType::FIELD_EXAMPLE_SETTING) => 'default_value',
-        ];
     }
 
     /**
@@ -147,30 +125,5 @@ EOF
         }
 
         return true;
-    }
-
-    /**
-     * Get module configuration page content
-     */
-    public function getContent(): void
-    {
-        $container = SymfonyContainer::getInstance();
-
-        if ($container != null) {
-            /** @var UrlGeneratorInterface */
-            $router = $container->get('router');
-
-            Tools::redirectAdmin($router->generate('kj_fix_order_slip_total_settings'));
-        }
-    }
-
-    /**
-     * Example hook
-     *
-     * @param array<string, mixed> $params Hook parameters
-     */
-    public function hookExampleHook(array $params): void
-    {
-        /* Do anything */
     }
 }
