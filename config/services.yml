@@ -2,30 +2,12 @@ services:
   _defaults:
     public: true
 
-  kaudaj.module.fixordersliptotal.form.settings.general_configuration:
-    class: Kaudaj\Module\FixOrderSlipTotal\Form\Settings\GeneralConfiguration
+  kaudaj.module.fix_order_slip_total.adapter.order.query_handler.get_order_for_viewing_handler:
+    class: Kaudaj\Module\FixOrderSlipTotal\Adapter\Order\QueryHandler\GetOrderForViewingHandler
+    decorates: prestashop.adapter.order.query_handler.get_order_for_viewing_handler
     arguments:
+      - "@kaudaj.module.fix_order_slip_total.adapter.order.query_handler.get_order_for_viewing_handler.inner"
+      - "@translator"
+      - '@=service("prestashop.adapter.legacy.context").getContext().language.id'
+      - "@prestashop.core.localization.locale.context_locale"
       - "@prestashop.adapter.legacy.configuration"
-      - "@prestashop.adapter.shop.context"
-      - "@prestashop.adapter.multistore_feature"
-
-  kaudaj.module.fixordersliptotal.form.settings.general_type:
-    class: 'Kaudaj\Module\FixOrderSlipTotal\Form\Settings\GeneralType'
-    parent: "form.type.translatable.aware"
-    public: true
-    tags:
-      - { name: form.type }
-
-  kaudaj.module.fixordersliptotal.form.settings.general_form_data_provider:
-    class: 'Kaudaj\Module\FixOrderSlipTotal\Form\Settings\GeneralFormDataProvider'
-    arguments:
-      - "@kaudaj.module.fixordersliptotal.form.settings.general_configuration"
-
-  kaudaj.module.fixordersliptotal.form.settings.general_form_data_handler:
-    class: 'PrestaShop\PrestaShop\Core\Form\Handler'
-    arguments:
-      - "@form.factory"
-      - "@prestashop.core.hook.dispatcher"
-      - "@kaudaj.module.fixordersliptotal.form.settings.general_form_data_provider"
-      - 'Kaudaj\Module\FixOrderSlipTotal\Form\Settings\GeneralType'
-      - "General"
